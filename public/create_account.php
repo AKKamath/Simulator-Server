@@ -26,11 +26,12 @@
 	{ 
 		// Send variables for the MySQL database class.
 		$pass = password_hash($pass, PASSWORD_DEFAULT);
-		$query = "INSERT INTO User ('Username', 'Password', 'Join_date', 'Currency') VALUES ('$name', '$pass', CURRENT_DATE, 0);"; 
-		$result = mysqli_query($db, $query); 
+		$pass = mysqli_real_escape_string($db, $pass);
+		$query = "INSERT INTO User (Username, Password, Join_date, Currency) VALUES ('". $name. "', '" .  $pass . "', CURRENT_DATE, 0);";
+		$result = mysqli_query($db, $query);
 		if (!$result) 
 		{
-			echo "Err: Query Code " . $mysqli->error;
+			echo "Err: Query Code " . mysqli_error($db);
 			exit;
 		}
 		else
