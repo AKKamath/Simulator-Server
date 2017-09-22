@@ -25,10 +25,10 @@
 	if($real_hash == $hash) 
 	{ 
 		// Send variables for the MySQL database class.
-		$pass = password_hash($pass);
+		$pass = password_hash($pass, PASSWORD_DEFAULT);
 		$query = "INSERT INTO User ('Username', 'Password', 'Join_date', 'Currency') VALUES ('$name', '$pass', CURRENT_DATE, 0);"; 
 		$result = mysqli_query($db, $query); 
-		if (!result) 
+		if (!$result) 
 		{
 			echo "Err: Query Code " . $mysqli->error;
 			exit;
