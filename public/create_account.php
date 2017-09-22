@@ -1,5 +1,7 @@
-<?php 
-	$db = mysqli_connect('MySQL_Hostname', 'MySQL_Username', 'MySQL_Password', 'MySQL_DB'); 
+<?php
+	$DBInfo = file_get_contents("../mysql.json");
+	$DBInfo = json_decode($DBInfo, true);
+	$db = mysqli_connect($DBInfo["Host"], $DBInfo["User"], $DBInfo["Pass"], $DBInfo["DB"]); 
 	// Check connection
 	if (mysqli_connect_errno())
 	{
