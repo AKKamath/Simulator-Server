@@ -3,9 +3,14 @@
 	$DBInfo = json_decode($DBInfo, true);
 	$db = mysqli_connect($DBInfo["Host"], $DBInfo["User"], $DBInfo["Pass"], $DBInfo["DB"]); 
 	// Check connection
+	if(empty($_GET['User']) || empty($_GET['Pass']) || empty($_GET['hash']))
+	{
+		echo "Err: Parameters missing";
+		exit;
+	}
 	if (mysqli_connect_errno())
 	{
-	  echo "Err: " . mysqli_connect_error();
+	  echo "Err: Connection Code " . mysqli_connect_error();
 	  exit;
 	}
 
@@ -25,7 +30,7 @@
 		$result = mysqli_query($db, $query); 
 		if (!result) 
 		{
-			echo "Err: " . $mysqli->error;
+			echo "Err: Query Code " . $mysqli->error;
 			exit;
 		}
 		else
