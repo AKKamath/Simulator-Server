@@ -1,5 +1,5 @@
 <?php 
-	$db = mysqli_connect('mysql_host', 'mysql_user', 'mysql_password', 'mysql_db'); 
+	$db = mysqli_connect('MySQL_Hostname', 'MySQL_Username', 'MySQL_Password', 'MySQL_DB'); 
 	// Check connection
 	if (mysqli_connect_errno())
 	{
@@ -8,13 +8,13 @@
 	}
 
 	// Strings must be escaped to prevent SQL injection attack. 
-	$name = mysql_real_escape_string($db, $_GET['User']); 
-	$pass = mysql_real_escape_string($db, $_GET['Pass']); 
+	$name = mysqli_real_escape_string($db, $_GET['User']); 
+	$pass = mysqli_real_escape_string($db, $_GET['Pass']); 
 	$hash = $_GET['hash']; 
 
 	$secretKey = "farmersAreCool";
 
-	$real_hash = md5($name . $score . $secretKey); 
+	$real_hash = md5($name . $pass . $secretKey); 
 	if($real_hash == $hash) 
 	{ 
 		// Send variables for the MySQL database class.
