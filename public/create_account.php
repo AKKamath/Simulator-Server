@@ -1,8 +1,8 @@
 <?php
 	// Make sure valid request has been made
-	if(empty($_GET['User']) || empty($_GET['Pass']) || empty($_GET['hash']))
+	if(empty($_GET['User']) || empty($_POST['Pass']) || empty($_GET['hash']))
 	{
-		echo "Error parameters missing";
+		echo "Error, parameters missing";
 		exit;
 	}
 	// Retrieve connection details
@@ -12,19 +12,19 @@
 	$db = mysqli_connect($DBInfo["Host"], $DBInfo["User"], $DBInfo["Pass"], $DBInfo["DB"]); 
 	if (mysqli_connect_errno())
 	{
-	    echo "Error connecting to server " . mysqli_connect_error();
+	    echo "Error connecting to server: " . mysqli_connect_error();
 		exit;
 	}
 
 	// Strings must be escaped to prevent SQL injection attack. 
 	$name = mysqli_real_escape_string($db, $_GET['User']); 
-	$pass = mysqli_real_escape_string($db, $_GET['Pass']); 
+	$pass = mysqli_real_escape_string($db, $_POST['Pass']); 
 	$hash = $_GET['hash']; 
 	// Shhhhh, it's a secret
 	$secretKey = "farmersAreCool";
 
 	// Verify that request was genuine
-	$real_hash = md5($name . $pass . $secretKey); 
+	$real_hash = md5($name . $pass . $secretKey);
 	if($real_hash == $hash) 
 	{
 		// Check for existing accounts
@@ -51,7 +51,7 @@
 		}
 		else
 		{
-			echo "Success";
+			echo "Successfully created account";
 		}
 	}
 	else
