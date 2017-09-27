@@ -1,4 +1,5 @@
 <?php
+	
 	// Make sure valid request has been made
 	if(empty($_GET['User']) || empty($_POST['Pass']) || empty($_GET['hash']))
 	{
@@ -12,7 +13,7 @@
 	$db = mysqli_connect($DBInfo["Host"], $DBInfo["User"], $DBInfo["Pass"], $DBInfo["DB"]); 
 	if (mysqli_connect_errno())
 	{
-	    echo "Error connecting to server: " . mysqli_connect_error();
+		echo "Error connecting to server: " . mysqli_connect_error();
 		exit;
 	}
 
@@ -51,7 +52,12 @@
 		}
 		else
 		{
-			echo "Successfully created account";
+			$query = "SELECT MAX(Id) FROM User;";
+			$result = mysqli_query($db, $query);
+			$row = mysqli_fetch_row($result);
+			echo "Successfully created account#";
+			echo $row['0'];
+			mysqli_free_result($result);
 		}
 	}
 	else
