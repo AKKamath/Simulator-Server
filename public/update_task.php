@@ -18,8 +18,8 @@
 	else
 	{
 		if(empty($_GET['fail']))
-			mysqli_query($db, "UPDATE Tasks SET Update_time = ". $_GET['update'] ." WHERE TileId = " . $_GET['TileId'] . ";");
+			mysqli_query($db, "UPDATE Tasks SET Update_time = '". $_GET['update'] ."' WHERE TileId = " . $_GET['TileId'] . ";");
 		else
-			mysqli_query($db, "UPDATE Tasks SET Update_time = ". $_GET['update'] ." AND Fail_time = " . $_GET['fail'] . " WHERE TileId = " . $_GET['TileId'] . ";");
+			mysqli_query($db, "UPDATE Tasks SET Update_time = '". $_GET['update'] ."' AND Fail_time = '" . $_GET['fail'] . "' WHERE TileId = " . $_GET['TileId'] . ";");
 	}
 ?>
